@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { mergeMap } from 'rxjs/operators';
-import { StockService } from '../../services/stock.service';
+import { StockService } from '../../_services/stock.service';
 import { MONTH_NAMES } from '../../static_data/stock.constants';
 
 interface MonthData {
