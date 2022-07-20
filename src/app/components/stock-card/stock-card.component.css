@@ -1,0 +1,41 @@
+.container-inform {
+  margin: 10px 0;
+}
+
+.container-inform span {
+  margin-right: 10px;
+}
+
+.stk-card {
+  position: relative;
+  border: 2px solid black;
+  padding: 15px;
+  margin-top: 20px;
+  min-height: 100px;
+  border-radius: 2px;
+}
+
+.arrow {
+  position: absolute;
+  right: 35%;
+  bottom: 20%;
+  font-size: 40px;
+}
+
+.arrow.up {
+  color: #10af42;
+}
+
+.arrow.down {
+  color: #ca3015;
+}
+
+.close-sym {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+h4 {
+  margin: 0px;
+}

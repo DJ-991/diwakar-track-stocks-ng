@@ -1,0 +1,34 @@
+<div class="stk-card">
+  <span class="close-sym" (click)="onClose()"> &#10006; </span>
+  <ng-container *ngIf="loading$ | async; else doneLoading">
+    <span> Loading..... </span>
+  </ng-container>
+  <ng-template #doneLoading>
+    <div *ngIf="quoteInfo$ | async as quote; else error">
+      <h4>{{ nameDisplay | titlecase }} ({{ stockCode }})</h4>
+      <div class="container-inform">
+        <span>
+          Change today: {{ quote.dp > 0 ? '+' : ''
+          }}{{ quote.dp | number: '1.1-2' }}%
+        </span>
+        <span> Opening price: {{ quote.o | currency }} </span>
+      </div>
+      <div class="container-inform">
+        <span> Current price: {{ quote.c | currency }} </span>
+        <span> High price: {{ quote.h | currency }} </span>
+      </div>
+      <span class="arrow" [ngClass]="quote.dp > 0 ? 'up' : 'down'">
+        {{ quote.dp > 0 ? '&uarr;' : '&darr;' }}
+      </span>
+      <button
+        [routerLink]="['/sentiment', stockCode]"
+        class="btn btn-default btn-sm"
+      >
+        Go to social sentiment details >
+      </button>
+    </div>
+    <ng-template #error>
+      {{ errorMessage }}
+    </ng-template>
+  </ng-template>
+</div>

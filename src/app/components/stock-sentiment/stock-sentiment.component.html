@@ -1,0 +1,23 @@
+<div class="container-senti" *ngIf="!isLoading; else loading">
+  <h3>{{ name | titlecase }} ({{ code }})</h3>
+  <div class="months-container" *ngIf="monthsData.length; else empty">
+    <div class="month" *ngFor="let month of monthsData">
+      <div class="numbers">
+        <h4>{{ month.name }}</h4>
+        <span>
+          Change: {{ month.change > 0 ? '+' : '' }}{{ month.change }}
+        </span>
+        <span> MSPR: {{ month.mspr }} </span>
+      </div>
+      <span class="arrow" [ngClass]="month.mspr > 0 ? 'up' : 'down'">
+        {{ month.mspr > 0 ? '&uarr;' : '&darr;' }}
+      </span>
+    </div>
+  </div>
+  <ng-template #empty> No data found </ng-template>
+</div>
+<ng-template #loading> Loading... </ng-template>
+<br />
+<button class="btn btn-default btn-sm" routerLink="/">
+  < Back to list of stocks
+</button>

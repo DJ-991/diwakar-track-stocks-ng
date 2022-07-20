@@ -1,0 +1,43 @@
+.container-senti {
+  border: 2px solid black;
+  border-radius: 2px;
+  padding: 15px;
+}
+
+.months-container {
+  display: flex;
+  gap: 15px;
+}
+
+h3 {
+  margin: 0;
+}
+
+h4 {
+  margin: 18px 0 0;
+}
+
+.month {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  column-gap: 15px;
+}
+
+.numbers {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  font-size: 38px;
+}
+
+.arrow.up {
+  color: rgb(9, 153, 9);
+}
+
+.arrow.down {
+  color: rgb(209, 23, 23);
+}

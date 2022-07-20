@@ -1,0 +1,19 @@
+p {
+  font-family: Lato;
+}
+
+.form-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.search-container {
+  border: 2px solid black;
+  padding: 15px;
+  border-radius: 2px;
+}
+
+.form-container.ng-submitted .stock-name-input.ng-invalid {
+  border: 1px solid red;
+}

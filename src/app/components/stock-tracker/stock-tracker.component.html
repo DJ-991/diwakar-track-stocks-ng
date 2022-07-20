@@ -1,0 +1,35 @@
+<div class="root-container">
+  <div class="search-container">
+    <span> Enter the symbol of a stock to track (i.e. AAPL, TSLA, GOOGL) </span>
+    <form
+      class="form-container"
+      [formGroup]="formGroup"
+      (ngSubmit)="onSubmit()"
+    >
+      <input
+        class="stock-name-input"
+        type="text"
+        [ngModel]="textToUpperCase"
+        (ngModelChange)="changeToUpperCase($event)"
+        placeholder="Enter Stock Code"
+        formControlName="stockCode"
+      />
+      <button class="btn btn-default btn-sm">Track Stock</button>
+      <span
+        *ngIf="
+          formGroup.controls['stockCode'].errors &&
+          formGroup.controls['stockCode'].touched
+        "
+        >Stock-Code should be 1 - 5 characters.
+      </span>
+    </form>
+  </div>
+
+  <div class="cards-container">
+    <app-stock-card
+      *ngFor="let stockCode of activeStocks; index as idx"
+      [stockCode]="stockCode"
+      (close)="removeStock(idx)"
+    ></app-stock-card>
+  </div>
+</div>
