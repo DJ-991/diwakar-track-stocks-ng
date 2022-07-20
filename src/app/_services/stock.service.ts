@@ -44,7 +44,7 @@ export class StockService {
         },
       })
       .pipe(catchError(this.errorHandler));
-// forkjoin-operator for combine the last-emitted values of array-observables once done
+    // forkjoin-operator for combine the last-emitted values of array-observables once done
     return forkJoin({ quoteInfo: quoteRequest, symbolInfo: symbolRequest });
   }
 
@@ -59,8 +59,11 @@ export class StockService {
     const from = temp_from.toISOString().slice(0, 10); //last 3rd month first date
 
     // Setting the to_Date
-    const to = new Date().toISOString().slice(0, 10);  //last month last date
-    
+    // const to = new Date().toISOString().slice(0, 10); //last month last date
+    const to = new Date(date.getFullYear(), date.getMonth())
+      .toISOString()
+      .slice(0, 10);
+      
     // Calling API
     const sentimentRequest = this.httpClient
       .get<SentimentInfo>(SENTIMENT_URL, {
