@@ -52,9 +52,11 @@ export class StockService {
     const date = new Date();
 
     // Setting the from_Date
-    const from = new Date(date.getFullYear(), date.getMonth() - 3, 2)
-      .toISOString()
-      .slice(0, 10); //last 3rd month first date
+    let temp_from = new Date();
+    temp_from.setMonth(date.getMonth() - 3);
+    temp_from.setDate(1);
+    const from = temp_from.toISOString().slice(0, 10);
+    //last 3rd month first date
 
     // Setting the to_Date
     const to = new Date(date.getFullYear(), date.getMonth())
