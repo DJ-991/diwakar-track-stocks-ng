@@ -17,10 +17,12 @@ interface MonthData {
 export class StockSentimentComponent {
   name = '';
   code = '';
+  // Storing Months data
   monthsData: MonthData[] = [];
   isLoading = true;
 
   constructor(activatedRoute: ActivatedRoute, stockService: StockService) {
+    // getting the stock symbol value from URL
     activatedRoute.params
       .pipe(
         mergeMap((params) => {
@@ -30,10 +32,10 @@ export class StockSentimentComponent {
       )
       .subscribe((data) => {
         this.isLoading = false;
-        console.log('data', data);
         this.name = data.symbolInfo.result.find(
           (res) => res.symbol === this.code
         )?.description;
+        // assigning the last 3 months of data to array
         this.monthsData = data.sentimentInfo.data.map((item) => {
           return {
             name: MONTH_NAMES[item.month - 1],

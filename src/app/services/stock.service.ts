@@ -18,12 +18,15 @@ import {
   providedIn: 'root',
 })
 export class StockService {
+  //1. handling the errors while fetching the data
   errorHandler = (error) => {
     console.log('Error in service', error);
     return throwError(() => error);
   };
+
   constructor(private readonly httpClient: HttpClient) {}
 
+  //2. Getting the stock information for given stock code
   getStockInfo(code: string): Observable<StockInfo> {
     const quoteRequest = this.httpClient
       .get<QuoteResponse>(QUOTE_URL, {
@@ -44,14 +47,21 @@ export class StockService {
     return forkJoin({ quoteInfo: quoteRequest, symbolInfo: symbolRequest });
   }
 
+  //3. Getting the insider-sentiment data for each stock code
   getStockSentiment(code: string): Observable<StockSentiment> {
     const date = new Date();
-    const from = new Date(date.getFullYear(), date.getMonth() - 3, 1)
+
+    // Setting the from_Date
+    const from = new Date(date.getFullYear(), date.getMonth() - 3, 2)
       .toISOString()
-      .slice(0, 10);
-    const to = new Date(date.getFullYear(), date.getMonth(), 0)
+      .slice(0, 10); //last 3rd month first date
+
+    // Setting the to_Date
+    const to = new Date(date.getFullYear(), date.getMonth())
       .toISOString()
-      .slice(0, 10);
+      .slice(0, 10); //last month last date
+
+    // Calling API
     const sentimentRequest = this.httpClient
       .get<SentimentInfo>(SENTIMENT_URL, {
         params: {

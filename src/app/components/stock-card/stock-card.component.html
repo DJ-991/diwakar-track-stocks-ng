@@ -10,6 +10,7 @@
         <span>
           Change today: {{ quote.dp > 0 ? '+' : ''
           }}{{ quote.dp | number: '1.1-2' }}%
+          <!-- number pipe and upto 2 decimal values -->
         </span>
         <span> Opening price: {{ quote.o | currency }} </span>
       </div>
@@ -19,6 +20,7 @@
       </div>
       <span class="arrow" [ngClass]="quote.dp > 0 ? 'up' : 'down'">
         {{ quote.dp > 0 ? '&uarr;' : '&darr;' }}
+        <!-- checking for up arrows and down arrows based on quote dp data -->
       </span>
       <button
         [routerLink]="['/sentiment', stockCode]"
