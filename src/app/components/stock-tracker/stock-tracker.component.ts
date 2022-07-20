@@ -7,8 +7,10 @@ import { LOCAL_STORE_KEY } from '../../static_data/stock.constants';
   styleUrls: ['./stock-tracker.component.css'],
   templateUrl: './stock-tracker.component.html',
 })
-export class StockTrackerComponent implements OnDestroy {
-  private readonly formValChange$: Subscription;
+export class StockTrackerComponent {
+  textToUpperCase: string = '';
+
+  //readonly - member accessed outside the class but value can't be changed
   readonly activeStocks: string[] = JSON.parse(
     localStorage.getItem(LOCAL_STORE_KEY) || '[]'
   );
@@ -20,34 +22,15 @@ export class StockTrackerComponent implements OnDestroy {
     ]),
   });
 
-  textToUpperCase: string = '';
+  constructor() {}
 
-  // get fc() {
-  //   return this.formGroup.get('stockCode');
-  // }
-
-  constructor() {
-    // this.formValChange$ = this.fc.valueChanges.subscribe((val) => {
-    //   console.log('val', val);
-    //   if (!val) return;
-    //   const updated = val.trim().toUpperCase();
-    //   if (val !== updated) {
-    //     this.fc.setValue(updated);
-    //     this.fc.updateValueAndValidity();
-    //   }
-    // });
-  }
-
+  //Entered Stock code in UpperCase
   changeToUpperCase(e) {
-    // const v= e.target.value;
     if (!e) return;
-    //  if(v.trim().length()===0) return;
-    //   this.textToUpperCase = v.trim().toUpperCase();
-    // console.log("input value", e.target.value);
     this.textToUpperCase = e.toUpperCase();
-    // if (!e) return;
   }
 
+  //onSubmit the Stock code
   onSubmit() {
     this.formGroup.markAllAsTouched();
     console.log('this.formGroup.value', this.formGroup.value.stockCode);
@@ -65,10 +48,7 @@ export class StockTrackerComponent implements OnDestroy {
     this.formGroup.reset();
   }
 
-  ngOnDestroy() {
-    // this.formValChange$.unsubscribe();
-  }
-
+  //Removing the stock from active stocks after close(X) button click
   removeStock(idx: number) {
     this.activeStocks.splice(idx, 1);
     localStorage.setItem(LOCAL_STORE_KEY, JSON.stringify(this.activeStocks));
