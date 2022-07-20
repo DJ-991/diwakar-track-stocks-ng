@@ -37,7 +37,6 @@ export class StockSentimentComponent {
         )?.description;
         // assigning the last 3 months of data to array
         this.monthsData = data.sentimentInfo.data.map((item) => {
-          console.log(item);
           return {
             name: MONTH_NAMES[item.month - 1], // array length - 1 for getting exact month
             change: item.change,

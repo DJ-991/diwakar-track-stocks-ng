@@ -16,9 +16,11 @@ export class StockCardComponent implements OnInit {
 
   // Quote information of each stock stored as BehaviorSubject for async behaviour
   quoteInfo$ = new BehaviorSubject<QuoteResponse | null>(null);
+
+  //Loader variable for true false async calls
   loading$ = new BehaviorSubject<Boolean>(true);
 
-  constructor(private readonly stockService: StockService) {}
+  constructor(private stockService: StockService) {}
 
   ngOnInit() {
     // caling the Stock Info API for getting the data by passing stock code

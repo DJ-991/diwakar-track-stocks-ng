@@ -10,10 +10,10 @@ export class StockTrackerComponent {
   textToUpperCase: string = '';
 
   //readonly - member accessed outside the class but value can't be changed
-  readonly activeStocks: string[] = JSON.parse(
+ activeStocks: string[] = JSON.parse(
     localStorage.getItem(LOCAL_STORE_KEY) || '[]'
   );
-  readonly formGroup = new FormGroup({
+ formGroup = new FormGroup({
     // initialize stock code with FormControl and
     stockCode: new FormControl('', [
       Validators.required,
