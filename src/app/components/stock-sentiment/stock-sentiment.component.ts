@@ -8,7 +8,10 @@ interface MonthData {
   name: string;
   change: number;
   mspr: number;
+  isDataAvail: boolean;
 }
+
+const curr_month = new Date().getMonth();
 
 @Component({
   templateUrl: './stock-sentiment.component.html',
@@ -17,12 +20,30 @@ interface MonthData {
 export class StockSentimentComponent {
   name = '';
   code = '';
-  // Storing Months data
-  monthsData: MonthData[] = [];
+  monthsData: MonthData[] = [
+    {
+      name: MONTH_NAMES[curr_month - 3],
+      change: 0,
+      mspr: 0,
+      isDataAvail: false,
+    },
+    {
+      name: MONTH_NAMES[curr_month - 2],
+      change: 0,
+      mspr: 0,
+      isDataAvail: false,
+    },
+    {
+      name: MONTH_NAMES[curr_month - 1],
+      change: 0,
+      mspr: 0,
+      isDataAvail: false,
+    },
+  ];
+
   isLoading = true;
 
   constructor(activatedRoute: ActivatedRoute, stockService: StockService) {
-    // getting the stock symbol value from URL
     activatedRoute.params
       .pipe(
         mergeMap((params) => {
@@ -32,17 +53,34 @@ export class StockSentimentComponent {
       )
       .subscribe((data) => {
         this.isLoading = false;
+        console.log('data', data);
         this.name = data.symbolInfo.result.find(
           (res) => res.symbol === this.code
         )?.description;
-        // assigning the last 3 months of data to array
+
+        this.monthsData.forEach((val, index) => {
+          data.sentimentInfo.data.map((item) => {
+            if (MONTH_NAMES[item.month - 1] == val.name) {
+              this.monthsData[index] = {
+                name: MONTH_NAMES[item.month - 1],
+                change: item.change,
+                mspr: item.mspr,
+                isDataAvail: true,
+              };
+            }
+          });
+        });
+
+        /*
         this.monthsData = data.sentimentInfo.data.map((item) => {
           return {
-            name: MONTH_NAMES[item.month - 1], // array length - 1 for getting exact month
+            name: MONTH_NAMES[item.month - 1],
             change: item.change,
             mspr: item.mspr,
+            dataAvail : true
           };
         });
+        */
       });
   }
 }
