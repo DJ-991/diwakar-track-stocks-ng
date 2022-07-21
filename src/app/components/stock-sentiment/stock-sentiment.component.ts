@@ -20,13 +20,9 @@ const curr_month = new Date().getMonth();
 export class StockSentimentComponent {
   name = '';
   code = '';
+
+  // Setting up initial value last 3 months of data from current date
   monthsData: MonthData[] = [
-    {
-      name: MONTH_NAMES[curr_month - 3],
-      change: 0,
-      mspr: 0,
-      isDataAvail: false,
-    },
     {
       name: MONTH_NAMES[curr_month - 2],
       change: 0,
@@ -35,6 +31,12 @@ export class StockSentimentComponent {
     },
     {
       name: MONTH_NAMES[curr_month - 1],
+      change: 0,
+      mspr: 0,
+      isDataAvail: false,
+    },
+    {
+      name: MONTH_NAMES[curr_month],
       change: 0,
       mspr: 0,
       isDataAvail: false,
@@ -54,11 +56,10 @@ export class StockSentimentComponent {
       )
       .subscribe((data) => {
         this.isLoading = false;
-        console.log('data', data);
         this.name = data.symbolInfo.result.find(
           (res) => res.symbol === this.code
         )?.description;
-        // months data for each months
+        // set data for months matching from API
         this.monthsData.forEach((val, index) => {
           data.sentimentInfo.data.map((item) => {
             if (MONTH_NAMES[item.month - 1] == val.name) {
