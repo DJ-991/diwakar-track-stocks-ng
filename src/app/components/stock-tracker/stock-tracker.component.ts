@@ -29,8 +29,9 @@ export class StockTrackerComponent {
 
   //onSubmit the Stock code
   onSubmit() {
+    this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
-      console.log('Invalid', '"' + this.formGroup.value.stockCode + '"');
+      console.log('Invalid', '"' + this.formGroup.value + '"');
       return;
     }
     // check stock code already exist by indexOf
