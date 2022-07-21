@@ -59,10 +59,8 @@ export class StockService {
     const from = temp_from.toISOString().slice(0, 10); //last 3rd month first date
 
     // Setting the to_Date
-    // const to = new Date().toISOString().slice(0, 10); //last month last date
-    const to = new Date(date.getFullYear(), date.getMonth())
-      .toISOString()
-      .slice(0, 10);
+    const to = new Date().toISOString().slice(0, 10); //last month last date
+    
       
     // Calling API
     const sentimentRequest = this.httpClient
