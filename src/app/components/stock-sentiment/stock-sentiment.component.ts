@@ -44,6 +44,7 @@ export class StockSentimentComponent {
   isLoading = true;
 
   constructor(activatedRoute: ActivatedRoute, stockService: StockService) {
+    // getting the stock-symbol from routed URL
     activatedRoute.params
       .pipe(
         mergeMap((params) => {
@@ -57,7 +58,7 @@ export class StockSentimentComponent {
         this.name = data.symbolInfo.result.find(
           (res) => res.symbol === this.code
         )?.description;
-
+        // months data for each months
         this.monthsData.forEach((val, index) => {
           data.sentimentInfo.data.map((item) => {
             if (MONTH_NAMES[item.month - 1] == val.name) {
@@ -70,17 +71,6 @@ export class StockSentimentComponent {
             }
           });
         });
-
-        /*
-        this.monthsData = data.sentimentInfo.data.map((item) => {
-          return {
-            name: MONTH_NAMES[item.month - 1],
-            change: item.change,
-            mspr: item.mspr,
-            dataAvail : true
-          };
-        });
-        */
       });
   }
 }
