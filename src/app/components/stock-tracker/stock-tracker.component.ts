@@ -15,11 +15,7 @@ export class StockTrackerComponent {
   );
  formGroup = new FormGroup({
     // initialize stock code with FormControl and
-    stockCode: new FormControl('', [
-      Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(5),
-    ]),
+    stockCode: new FormControl(''),
   });
 
   constructor() {}
@@ -28,13 +24,13 @@ export class StockTrackerComponent {
   changeToUpperCase(e) {
     if (!e) return;
     this.textToUpperCase = e.toUpperCase();
+    this.formGroup.value.stockCode = this.textToUpperCase;
   }
 
   //onSubmit the Stock code
   onSubmit() {
-    // this.formGroup.markAllAsTouched();
     if (this.formGroup.invalid) {
-      console.log('Invalid', '"' + this.formGroup.value + '"');
+      console.log('Invalid', '"' + this.formGroup.value.stockCode + '"');
       return;
     }
     // check stock code already exist by indexOf

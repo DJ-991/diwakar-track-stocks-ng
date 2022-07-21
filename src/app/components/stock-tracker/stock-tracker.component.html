@@ -13,6 +13,9 @@
         (ngModelChange)="changeToUpperCase($event)"
         placeholder="Enter Stock Code"
         formControlName="stockCode"
+        [minLength]="1"
+        [maxLength]="5"
+        required
       />
       <button class="btn btn-default btn-sm">Track Stock</button>
       <span
