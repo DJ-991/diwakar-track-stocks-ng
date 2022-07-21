@@ -4,12 +4,17 @@
     <div class="month" *ngFor="let month of monthsData">
       <div class="numbers">
         <h4>{{ month.name }}</h4>
-        <span>
+        <span *ngIf="month.isDataAvail">
           Change: {{ month.change > 0 ? '+' : '' }}{{ month.change }}
         </span>
-        <span> MSPR: {{ month.mspr }} </span>
+        <span *ngIf="month.isDataAvail"> MSPR: {{ month.mspr }} </span>
+        <span *ngIf="!month.isDataAvail"> No data available </span>
       </div>
-      <span class="arrow" [ngClass]="month.mspr > 0 ? 'up' : 'down'">
+      <span
+        *ngIf="month.isDataAvail"
+        class="arrow"
+        [ngClass]="month.mspr > 0 ? 'up' : 'down'"
+      >
         {{ month.mspr > 0 ? '&uarr;' : '&darr;' }}
       </span>
     </div>
