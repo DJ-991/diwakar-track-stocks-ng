@@ -9,12 +9,11 @@ import { LOCAL_STORE_KEY } from '../../static_data/stock.constants';
 export class StockTrackerComponent {
   textToUpperCase: string = '';
 
-  //readonly - member accessed outside the class but value can't be changed
   activeStocks: string[] = JSON.parse(
     localStorage.getItem(LOCAL_STORE_KEY) || '[]'
   );
   formGroup = new FormGroup({
-    // initialize stock code with FormControl and
+    // initialize stock code with FormControl
     stockCode: new FormControl(''),
   });
 

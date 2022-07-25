@@ -49,6 +49,7 @@ export class StockSentimentComponent {
     // getting the stock-symbol from routed URL
     activatedRoute.params
       .pipe(
+        // maps each value from the source observable 
         mergeMap((params) => {
           this.code = params.symbol;
           return stockService.getStockSentiment(this.code);
